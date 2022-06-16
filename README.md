@@ -1,2 +1,3 @@
 # rasdark_infra
-rasdark Infra repository
+
+rasdark Infra repository for OTUS DevOps Learning
