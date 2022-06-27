@@ -2,6 +2,31 @@
 
 rasdark Infra repository for OTUS DevOps Learning
 
+# Выполнено ДЗ №5
+
+ - [x] Основное ДЗ: Сборка packer'ом с вынесением секретов в variables
+
+## В процессе сделано
+ - Установка packer
+ - Создание сервисного аккаунта, предоставление доступов в FOLDER, создание секретов (Ya.Clod)
+ - Подготовка шаблона, скриптов для будущего образа (fry)
+ - Создание образа
+
+## Как запустить
+ - Скопировать packer/variables.json.example в packer/variables.json
+ - Отредактировать packer/variables.json
+ - Выполнить последовательность команд:
+ ```
+ cd packer
+ packer validate -var-file=variables.json ubuntu16.json
+ packer build -var-file=variables.json ubuntu16.json
+ ```
+
+
+## Дополнительное ДЗ
+
+
+
 # Выполнено ДЗ №4
 
  - [x] Основное ДЗ
