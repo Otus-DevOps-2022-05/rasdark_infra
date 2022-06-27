@@ -5,9 +5,9 @@ After=mongodb.service
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bin/puma -d --pidfile /tmp/reddit.pid --dir /opt/app
-PIDFile=/tmp/puma.pid
-ExecStop=/usr/local/bin/pumactl -P /tmp/reddit.pid stop
+ExecStart=/usr/local/bin/puma -d --pidfile /run/reddit.pid --dir /opt/app
+PIDFile=/run/reddit.pid
+ExecStop=/usr/local/bin/pumactl -P /run/reddit.pid stop
 
 [Install]
 WantedBy=multi-user.target
