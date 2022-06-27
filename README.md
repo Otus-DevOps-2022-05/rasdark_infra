@@ -2,6 +2,30 @@
 
 rasdark Infra repository for OTUS DevOps Learning
 
+# Выполнено ДЗ №4
+
+ - [x] Основное ДЗ
+ - [x] Дополнительное ДЗ: скрипт для автодеплоя и запуска приложения после создания инстанса
+
+## В процессе сделано
+  - Подготовлены скрипты для установки необходимых компонент ОС
+  - Подготовлен скрипт для деплоя приложения
+
+## Реквизиты VM
+  testapp_IP = 51.250.86.108
+  testapp_port = 9292
+
+## Дополнительное ДЗ
+  Создан мета-файл, описывающий необходимые операции по автодеплою: auto_startup.yaml
+
+  Поднятие инстанса производится командой:
+  ```
+  yc compute instance create --name reddit-app-auto --hostname reddit-app-auto \
+  --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB \
+  --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
+  --metadata serial-port-enable=1 --metadata-from-file user-data=auto_startup.yaml
+  ```
+
 # Выполнено ДЗ №3
 
  - [x] Основное ДЗ
