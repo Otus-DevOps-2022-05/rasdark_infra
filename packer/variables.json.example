@@ -1,6 +1,7 @@
 {
   "id_folder": "qwerty123",
   "image": "ubuntu-1604-lts",
+  "base_image": "Required for immutable image",
   "key_file": "./key.json",
   "ssh_user": "ubuntu"
 }

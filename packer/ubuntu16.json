@@ -5,11 +5,11 @@
             "service_account_key_file": "{{user `key_file`}}",
             "folder_id": "{{user `id_folder`}}",
             "source_image_family": "{{user `image`}}",
-            "image_name": "reddit-base-{{timestamp}}",
-            "image_family": "reddit-base",
+            "image_name": "{{user `base_image`}}-{{timestamp}}",
+            "image_family": "{{user `base_image`}}",
             "ssh_username": "{{user `ssh_user`}}",
             "use_ipv4_nat": "true",
-            "platform_id": "standard-v1"
+            "platform_id": "standard-v2"
         }
     ],
     "provisioners": [

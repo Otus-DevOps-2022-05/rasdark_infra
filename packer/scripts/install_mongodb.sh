@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Install MongoDB"
-apt update && apt install -y mongodb
+apt update -y
+apt install -y mongodb
 echo -e "\nStart and enable MongoDB"
 systemctl start mongodb
 systemctl enable mongodb
