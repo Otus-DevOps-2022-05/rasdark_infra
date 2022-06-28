@@ -1,0 +1,13 @@
+#systemd unit for reddit
+[Unit]
+Description=Reddit App (with Puma)
+After=mongodb.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/puma -d --pidfile /run/reddit.pid --dir /opt/app
+PIDFile=/run/reddit.pid
+ExecStop=/usr/local/bin/pumactl -P /run/reddit.pid stop
+
+[Install]
+WantedBy=multi-user.target

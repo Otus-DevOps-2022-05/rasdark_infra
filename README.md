@@ -2,6 +2,84 @@
 
 rasdark Infra repository for OTUS DevOps Learning
 
+# Выполнено ДЗ №5
+
+ - [x] Основное ДЗ: Сборка packer'ом с вынесением секретов в variables
+ - [x] Дополнительное ДЗ: Построение bake-образа
+ - [x] Дополнительное ДЗ: Автоматизация создания ВМ из bake-образа
+
+## В процессе сделано
+ - Установка packer
+ - Создание сервисного аккаунта, предоставление доступов в FOLDER, создание секретов (Ya.Clod)
+ - Подготовка шаблона, скриптов для будущего образа (fry)
+ - Создание образа
+
+## Как запустить
+ - Скопировать packer/variables.json.example в packer/variables.json
+ - Отредактировать packer/variables.json
+ - Выполнить последовательность команд:
+ ```
+ cd packer
+ packer validate -var-file=variables.json ubuntu16.json
+ packer build -var-file=variables.json ubuntu16.json
+ ```
+
+## Построение bake-образа
+
+Строим образ на базе созданного ранее базового образа. Для этого в качестве образа источника
+указываем reddit-base, так же необходимо указать id папки (по совместительнову это FOLDER_ID) в
+которой хранится базовый образ.
+
+В провижен необходимо добавить шаги, необходимые для того чтобы установить и настроить приложение.
+
+После редактирования файла с переменными и шаблона immutable.json можно "запекать" образ.
+
+ ```
+ cd packer
+ packer validate -var-file=variables.json immutable.json
+ packer build -var-file=variables.json immutable.json
+ ```
+
+Проверяем получившиеся образы (должно быть 2):
+```
+yc compute image list
+```
+
+## Автоматизация создания ВМ
+
+Прежде чем начать создавать ВМ, необходимо определиться с сетями. Или завести новые:
+
+Выдираем из вывода следующей команды ID новой сети:
+```
+yc vpc network create --name reddit-test
+```
+
+Подставляем в --network-id следующей команды:
+```
+yc vpc subnet create --name central-a --description "For test reddit-app deploy" \
+--folder-id b1gqpofo13bvldc6bvi4 --network-id enp3m070r365cvbuf8fd  \
+--zone ru-central1-a --range 10.61.0.0/24
+```
+
+Создаём ВМ, не забывая указать image-family к параметрам загрузочного диска и subnet-name к
+параметрам сети:
+```
+yc compute instance create --name reddit-app --memory=4 \
+--create-boot-disk name=reddit-full,size=12,image-family=reddit-full \
+--network-interface subnet-name=central-a,nat-ip-version=ipv4 \
+--metadata serial-port-enable=1 --ssh-key ~/.ssh/appuser.pub
+```
+
+Подглядываем внешний IP адрес и проверяем работу подключившись по ссш от имени yc-user
+```
+eval `ssh-agent -s`
+ssh -i ~/.ssh/appuser yc-user@<IP>
+```
+
+## Дополнительное ДЗ
+
+
+
 # Выполнено ДЗ №4
 
  - [x] Основное ДЗ

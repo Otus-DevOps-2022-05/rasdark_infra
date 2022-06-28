@@ -1,0 +1,41 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "service_account_key_file": "{{user `key_file`}}",
+            "folder_id": "{{user `id_folder`}}",
+            "source_image_family": "{{user `base_image`}}",
+            "source_image_folder_id": "{{user `id_folder`}}",
+            "image_name": "reddit-full-{{timestamp}}",
+            "image_family": "reddit-full",
+            "ssh_username": "{{user `ssh_user`}}",
+            "use_ipv4_nat": "true",
+            "platform_id": "standard-v2"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "files/reddit.service",
+            "destination": "/tmp/reddit.service"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo mv /tmp/reddit.service /etc/systemd/system/reddit.service",
+                "sudo apt-get install -y git",
+                "git clone -b monolith https://github.com/express42/reddit.git",
+                "sudo mv reddit /opt/app && sudo rm -rf /opt/app/.git && sudo chown -R root:root /opt/app",
+                "cd /opt/app && sudo bundle install"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "systemctl daemon-reload",
+                "systemctl enable reddit.service"
+            ],
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
