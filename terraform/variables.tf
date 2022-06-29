@@ -1,3 +1,26 @@
 variable service_account_key_file {
-  description = "Key file for Yandex.Cloud API"
+  description = "Path to Key file for Yandex.Cloud API"
+}
+variable cloud_id {
+  description = "Cloud ID"
+}
+variable folder_id {
+  description = "Folder ID"
+}
+variable region_id {
+  description = "region"
+  default     = "ru-central1"
+}
+variable zone {
+  description = "Zone"
+  default = "ru-central1-a"
+}
+variable public_key_path {
+  description = "Path to the public key used for ssh access"
+}
+variable subnet_id {
+  description = "Subnet ID"
+}
+variable private_key_path {
+  description = "path to private key"
 }

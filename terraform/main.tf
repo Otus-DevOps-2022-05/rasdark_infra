@@ -9,14 +9,14 @@
 provider "yandex" {
 #  version   = 0.35
   service_account_key_file = var.service_account_key_file
-  cloud_id  = "b1gid4vroi4t53jgmlpj"
-  folder_id = "b1gqpofo13bvldc6bvi4"
-  zone      = "ru-central1-a"
+  cloud_id  = var.cloud_id
+  folder_id = var.folder_id
+  zone      = var.zone
 }
 
 data "yandex_compute_image" "reddit" {
   family = "reddit-base"
-  folder_id = "b1gqpofo13bvldc6bvi4"
+  folder_id = var.folder_id
 }
 
 resource "yandex_compute_instance" "app" {
@@ -31,11 +31,11 @@ resource "yandex_compute_instance" "app" {
     }
   }
   network_interface {
-    subnet_id = "e9b9sjojl033kbun3gsj"
+    subnet_id = var.subnet_id
     nat = true
   }
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/appuser.pub")}"
+    ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
 
   provisioner "file" {
@@ -52,6 +52,6 @@ resource "yandex_compute_instance" "app" {
       host = yandex_compute_instance.app.network_interface.0.nat_ip_address
       user = "ubuntu"
       agent = false
-      private_key = file("~/.ssh/appuser")
+      private_key = file(var.private_key_path)
   }
 }
