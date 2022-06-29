@@ -24,3 +24,7 @@ variable subnet_id {
 variable private_key_path {
   description = "path to private key"
 }
+variable instance_count {
+  description = "count instances"
+  default     = 1
+}
