@@ -40,3 +40,12 @@ variable stage {
   description = "Stage"
   default = "prod"
 }
+variable access_key {
+  description = "key id"
+}
+variable secret_key {
+  description = "secret key"
+}
+variable bucket_name {
+  description = "bucket name"
+}
