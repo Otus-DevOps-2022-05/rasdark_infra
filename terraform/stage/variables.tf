@@ -36,3 +36,7 @@ variable db_disk_image {
   description = "Family of disk mage for mongodb"
   default     = "reddit-db"
 }
+variable stage {
+  description = "Stage"
+  default     = "stage"
+}

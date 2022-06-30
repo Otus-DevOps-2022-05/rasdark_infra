@@ -4,7 +4,7 @@ data "yandex_compute_image" "db-image" {
 }
 
 resource "yandex_compute_instance" "db" {
-  name = "reddit-db"
+  name = "reddit-db-${var.stage}"
 
   labels = {
     tags = "reddit-db"

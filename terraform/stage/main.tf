@@ -19,6 +19,7 @@ module "app" {
   app_disk_image  = var.app_disk_image
   subnet_id       = var.subnet_id
   folder_id       = var.folder_id
+  stage           = var.stage
 }
 
 module "db" {
@@ -27,4 +28,5 @@ module "db" {
   db_disk_image   = var.db_disk_image
   subnet_id       = var.subnet_id
   folder_id       = var.folder_id
+  stage           = var.stage
 }

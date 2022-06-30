@@ -12,3 +12,6 @@ variable db_disk_image {
 variable folder_id {
   description = "Folder ID"
 }
+variable stage {
+  description = "Stage"
+}
