@@ -28,3 +28,11 @@ variable instance_count {
   description = "count instances"
   default     = 1
 }
+variable app_disk_image {
+  description = "Family of disk image for reddit app"
+  default     = "reddit-app"
+}
+variable db_disk_image {
+  description = "Family of disk mage for mongodb"
+  default     = "reddit-db"
+}
