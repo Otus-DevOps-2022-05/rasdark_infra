@@ -6,7 +6,6 @@ terraform {
     key        = "prod/terraform.tfstate"
     access_key = "<skipped>"
     secret_key = "<skipped>"
-
     skip_region_validation      = true
     skip_credentials_validation = true
   }

@@ -20,6 +20,8 @@ module "app" {
   subnet_id       = var.subnet_id
   folder_id       = var.folder_id
   stage           = var.stage
+  mongod_ip       = module.db.internal_ip_address
+  private_key_path = var.private_key_path
 }
 
 module "db" {
@@ -29,4 +31,5 @@ module "db" {
   subnet_id       = var.subnet_id
   folder_id       = var.folder_id
   stage           = var.stage
+  private_key_path = var.private_key_path
 }

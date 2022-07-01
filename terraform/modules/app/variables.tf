@@ -14,3 +14,9 @@ variable folder_id {
 variable stage {
   description = "Stage"
 }
+variable mongod_ip {
+  description = "Mongodb IP"
+}
+variable private_key_path {
+  description = "path to private key"
+}

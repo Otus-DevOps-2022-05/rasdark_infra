@@ -15,3 +15,6 @@ variable folder_id {
 variable stage {
   description = "Stage"
 }
+variable private_key_path {
+  description = "path to private key"
+}
