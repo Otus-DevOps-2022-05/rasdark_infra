@@ -49,3 +49,7 @@ variable secret_key {
 variable bucket_name {
   description = "bucket name"
 }
+variable enable_provision {
+  description = "Enable provisioner"
+  default     = true
+}

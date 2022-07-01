@@ -28,6 +28,13 @@ resource "yandex_compute_instance" "app" {
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+}
+
+resource "null_resource" "app" {
+  count = var.enable_provision ? 1 : 0
+  triggers = {
+    cluster_instance_ids = yandex_compute_instance.app.id
+  }
 
   connection {
     type        = "ssh"

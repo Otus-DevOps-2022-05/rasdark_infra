@@ -20,3 +20,7 @@ variable mongod_ip {
 variable private_key_path {
   description = "path to private key"
 }
+variable enable_provision {
+  description = "Enable provisioner"
+  default = true
+}

@@ -38,7 +38,7 @@ variable db_disk_image {
 }
 variable stage {
   description = "Stage"
-  default = "prod"
+  default     = "prod"
 }
 variable access_key {
   description = "key id"
@@ -48,4 +48,8 @@ variable secret_key {
 }
 variable bucket_name {
   description = "bucket name"
+}
+variable enable_provision {
+  description = "Enable provisioner"
+  default     = true
 }
