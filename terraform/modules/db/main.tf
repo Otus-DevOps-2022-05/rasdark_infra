@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+}
+
 data "yandex_compute_image" "db-image" {
   family    = var.db_disk_image
   folder_id = var.folder_id
@@ -33,9 +41,9 @@ resource "yandex_compute_instance" "db" {
 
 resource "null_resource" "db" {
   count = var.enable_provision ? 1 : 0
-  triggers = {
-    cluster_instance_ids = yandex_compute_instance.db.id
-  }
+  # triggers = {
+  #   cluster_instance_ids = yandex_compute_instance.db.id
+  # }
 
   connection {
     type        = "ssh"
