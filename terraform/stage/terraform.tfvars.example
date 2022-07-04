@@ -11,3 +11,4 @@ db_disk_image  = "reddit-db"
 access_key = "access_key"
 secret_key = "secret_key"
 bucket_name = "test"
+enable_provision = true

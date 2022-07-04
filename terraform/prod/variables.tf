@@ -38,7 +38,7 @@ variable db_disk_image {
 }
 variable stage {
   description = "Stage"
-  default     = "stage"
+  default     = "prod"
 }
 variable access_key {
   description = "key id"
