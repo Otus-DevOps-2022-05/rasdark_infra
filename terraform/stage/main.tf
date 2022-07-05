@@ -41,3 +41,17 @@ module "vpc" {
   stage    = var.stage
   ip_range = var.ip_range
 }
+
+resource "local_file" "generate_inventory" {
+  content = templatefile("inventory.tpl", {
+    app_name = module.app.name,
+    db_name = module.db.name,
+    app_ip = module.app.external_ip_address_app,
+    db_ip = module.db.external_ip_address_db
+  })
+  filename = "inventory"
+
+  provisioner "local-exec" {
+    command = "chmod a-x inventory && ansible-inventory -i inventory --list > ../../ansible/inventory.json"
+  }
+}
