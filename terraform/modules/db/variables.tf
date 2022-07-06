@@ -9,9 +9,6 @@ variable db_disk_image {
   description = "Family of disk mage for mongodb"
   default     = "reddit-db"
 }
-variable folder_id {
-  description = "Folder ID"
-}
 variable stage {
   description = "Stage"
 }
