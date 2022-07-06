@@ -1,0 +1,29 @@
+{
+    "_meta": {
+        "hostvars": {
+            "reddit-app-stage": {
+                "ansible_host": "51.250.14.231"
+            },
+            "reddit-db-stage": {
+                "ansible_host": "51.250.12.9"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "app",
+            "db",
+            "ungrouped"
+        ]
+    },
+    "app": {
+        "hosts": [
+            "reddit-app-stage"
+        ]
+    },
+    "db": {
+        "hosts": [
+            "reddit-db-stage"
+        ]
+    }
+}
