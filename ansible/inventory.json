@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hostvars": {
-            "reddit-app-prod": {
-                "ansible_host": "51.250.66.129"
+            "reddit-app-stage": {
+                "ansible_host": "51.250.8.98"
             },
-            "reddit-db-prod": {
-                "ansible_host": "51.250.68.46"
+            "reddit-db-stage": {
+                "ansible_host": "51.250.83.24"
             }
         }
     },
@@ -18,12 +18,12 @@
     },
     "app": {
         "hosts": [
-            "reddit-app-prod"
+            "reddit-app-stage"
         ]
     },
     "db": {
         "hosts": [
-            "reddit-db-prod"
+            "reddit-db-stage"
         ]
     }
 }

@@ -14,6 +14,7 @@ module "app" {
   stage            = var.stage
   mongod_ip        = module.db.internal_ip_address
   private_key_path = var.private_key_path
+  enable_provision = var.enable_provision
   depends_on       = [module.db.internal_ip_address]
 }
 
@@ -24,6 +25,7 @@ module "db" {
   subnet_id        = module.vpc.subnet_id
   stage            = var.stage
   private_key_path = var.private_key_path
+  enable_provision = var.enable_provision
   depends_on       = [module.vpc.subnet_id]
 }
 
