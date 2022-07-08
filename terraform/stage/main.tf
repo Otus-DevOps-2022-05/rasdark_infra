@@ -6,22 +6,15 @@ terraform {
   }
 }
 
-provider "yandex" {
-  # version                  = 0.35
-  service_account_key_file = var.service_account_key_file
-  cloud_id                 = var.cloud_id
-  folder_id                = var.folder_id
-  zone                     = var.zone
-}
 module "app" {
   source           = "../modules/app"
   public_key_path  = var.public_key_path
   app_disk_image   = var.app_disk_image
   subnet_id        = module.vpc.subnet_id
-  folder_id        = var.folder_id
   stage            = var.stage
   mongod_ip        = module.db.internal_ip_address
   private_key_path = var.private_key_path
+  enable_provision = var.enable_provision
   depends_on       = [module.db.internal_ip_address]
 }
 
@@ -30,9 +23,9 @@ module "db" {
   public_key_path  = var.public_key_path
   db_disk_image    = var.db_disk_image
   subnet_id        = module.vpc.subnet_id
-  folder_id        = var.folder_id
   stage            = var.stage
   private_key_path = var.private_key_path
+  enable_provision = var.enable_provision
   depends_on       = [module.vpc.subnet_id]
 }
 
@@ -52,6 +45,18 @@ resource "local_file" "generate_inventory" {
   filename = "inventory"
 
   provisioner "local-exec" {
-    command = "chmod a-x inventory && ansible-inventory -i inventory --list > ../../ansible/inventory.json"
+    command = "chmod a-x inventory && ansible-inventory -i inventory --list > ../../ansible/inventory.json && mv inventory ../../ansible/"
+  }
+
+  provisioner "local-exec" {
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_one_play.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_multiple_plays.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/app.yml"
   }
 }

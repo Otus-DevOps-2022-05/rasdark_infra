@@ -8,9 +8,6 @@ variable app_disk_image {
   description = "Family of disk image for reddit app"
   default     = "reddit-app"
 }
-variable folder_id {
-  description = "Folder ID"
-}
 variable stage {
   description = "Stage"
 }
@@ -22,5 +19,4 @@ variable private_key_path {
 }
 variable enable_provision {
   description = "Enable provisioner"
-  default = true
 }

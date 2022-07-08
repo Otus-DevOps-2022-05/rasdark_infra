@@ -5,3 +5,5 @@
 *.tfvars
 .terraform/
 .terraform.lock.hcl
+.envrc
+*.retry
