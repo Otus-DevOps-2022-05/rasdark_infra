@@ -49,10 +49,14 @@ resource "local_file" "generate_inventory" {
   }
 
   provisioner "local-exec" {
-    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app.yml"
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_one_play.yml"
   }
 
   provisioner "local-exec" {
-    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app2.yml"
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_multiple_plays.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/app.yml"
   }
 }
