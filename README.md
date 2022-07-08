@@ -2,6 +2,47 @@
 
 rasdark Infra repository for OTUS DevOps Learning
 
+# Выполнено ДЗ №9
+
+ - [x] Основное ДЗ
+ - [x] Дополнительное ДЗ: Динамический инвентори Yandex.Cloud из PR ansible =)
+
+## В процессе сделано
+ - Плейбук для деплоя приложухи "всё-в-куче"
+ - Плейбук для деплоя по типу "один-плейбук-много-сценариев"
+ - Несколько плейбуков + импорт "шагов" в одном
+
+
+## Динамический инвентори
+  Определяем путь где ansible будет искать inventory плагин в первую очередь:
+  ```
+  ansible-config dump | grep INVENTORY_PLUGIN_PATH
+  ```
+  Находим там путь в домашней папке пользователя, создаем папку, копируем сам плагин в папку:
+  ```
+  mkdir -p ~/.ansible/plugins/inventory && cd $_
+  wget https://raw.githubusercontent.com/st8f/ansible/324dac4f674ff845bab5081f3fce18c31f1b25ca/lib/ansible/plugins/inventory/yc_compute.py
+  ```
+  Плагин зависит от Python-модуля yandexcloud. Установим его.
+  ```
+  pip install --user yandexcloud
+  ```
+
+  Правим ansible.cfg на тему нового inventory плагина yc_compute и имени инвентори файла, имя
+  которого должно оканчиваться, например, на yc.yml.
+
+  Создаем конфиг inventory_yc.yml (в коммите пример).
+  Чтобы спрятать креды создаем переменную окружения: YC_ANSIBLE_OAUTH_TOKEN
+  Подставляем в неё токен из:
+  ```
+  yc config list
+  ```
+
+  Используя функционал keyed_groups раскидываем обнаруженные плагином хосты по группам согласно
+  меткам, которые мы указывали в терраформе ещё =)
+
+
+
 # Выполнено ДЗ №8
 
  - [x] Основное ДЗ

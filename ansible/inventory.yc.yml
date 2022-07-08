@@ -1,0 +1,16 @@
+---
+plugin: yc_compute
+folders:
+  - b1gqpofo13bvldc6bvi4
+filters:
+  - status == 'RUNNING'
+auth_kind: oauth
+hostnames:
+  - "{{name}}"
+compose:
+  ansible_host: network_interfaces[0].primary_v4_address.one_to_one_nat.address
+keyed_groups:
+  - key: labels['tags']
+groups:
+  app: labels['tags'] == 'reddit-app'
+  db: labels['tags'] == 'reddit-db'
