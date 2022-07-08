@@ -1,6 +1,6 @@
 {
   "id_folder": "qwerty123",
   "image": "ubuntu-1604-lts",
-  "key_file": "key.json",
+  "key_file": "packer/key.json",
   "ssh_user": "ubuntu"
 }

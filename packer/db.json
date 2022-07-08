@@ -2,7 +2,6 @@
     "builders": [
         {
             "type": "yandex",
-            "service_account_key_file": "{{user `key_file`}}",
             "folder_id": "{{user `id_folder`}}",
             "source_image_family": "{{user `image`}}",
             "image_name": "reddit-db-{{timestamp}}",
@@ -15,9 +14,9 @@
     ],
     "provisioners": [
         {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
+            "type": "ansible",
+            "playbook_file": "ansible/packer_db.yml",
+            "user": "{{user `ssh_user`}}"
         }
     ]
 }

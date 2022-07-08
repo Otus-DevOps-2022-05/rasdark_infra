@@ -11,9 +11,12 @@ rasdark Infra repository for OTUS DevOps Learning
  - Плейбук для деплоя приложухи "всё-в-куче"
  - Плейбук для деплоя по типу "один-плейбук-много-сценариев"
  - Несколько плейбуков + импорт "шагов" в одном
+ - yc_compute плагин для динамического инвентори
+ - новые пакер образы с провиженом от ansible
 
 
 ## Динамический инвентори
+  Можно держать плагины в директории с проектом, или по стандартным путям поиска плагинов.
   Определяем путь где ansible будет искать inventory плагин в первую очередь:
   ```
   ansible-config dump | grep INVENTORY_PLUGIN_PATH
@@ -26,6 +29,10 @@ rasdark Infra repository for OTUS DevOps Learning
   Плагин зависит от Python-модуля yandexcloud. Установим его.
   ```
   pip install --user yandexcloud
+  ```
+  Проверяем, что с плагином всё норм:
+  ```
+  ansible-doc -t inventory yc_compute
   ```
 
   Правим ansible.cfg на тему нового inventory плагина yc_compute и имени инвентори файла, имя
@@ -40,6 +47,13 @@ rasdark Infra repository for OTUS DevOps Learning
 
   Используя функционал keyed_groups раскидываем обнаруженные плагином хосты по группам согласно
   меткам, которые мы указывали в терраформе ещё =)
+
+  Проверяем, что плагин работает, конфиг верный, инвентори "наполяется":
+  ```
+  ansible-inventory --graph
+  ```
+
+  Все. Можно работать =)
 
 
 
