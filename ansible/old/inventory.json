@@ -2,10 +2,10 @@
     "_meta": {
         "hostvars": {
             "reddit-app-stage": {
-                "ansible_host": "51.250.92.64"
+                "ansible_host": "51.250.66.82"
             },
             "reddit-db-stage": {
-                "ansible_host": "51.250.93.195"
+                "ansible_host": "62.84.119.105"
             }
         }
     },

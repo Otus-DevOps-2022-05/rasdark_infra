@@ -45,18 +45,26 @@ resource "local_file" "generate_inventory" {
   filename = "inventory"
 
   provisioner "local-exec" {
-    command = "chmod a-x inventory && ansible-inventory -i inventory --list > ../../ansible/inventory.json && mv inventory ../../ansible/"
+    command = "chmod a-x inventory && mv inventory ../../ansible/environments/${var.stage}/inventory"
   }
 
-  provisioner "local-exec" {
-    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_one_play.yml"
-  }
+  # provisioner "local-exec" {
+  #   command = "chmod a-x inventory && ansible-inventory -i inventory --list > ../../ansible/inventory.json && mv inventory ../../ansible/"
+  # }
 
   provisioner "local-exec" {
-    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_multiple_plays.yml"
+    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/environments/${var.stage}/group_vars/app"
   }
 
-  provisioner "local-exec" {
-    command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/app.yml"
-  }
+  # provisioner "local-exec" {
+  #   command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_one_play.yml"
+  # }
+
+  # provisioner "local-exec" {
+  #   command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/reddit_app_multiple_plays.yml"
+  # }
+
+  # provisioner "local-exec" {
+  #   command = "sed -ri 's/db_host: (\\b[0-9]{1,3}\\.){3}[0-9]{1,3}\\b/db_host: ${module.db.internal_ip_address}/' ../../ansible/app.yml"
+  # }
 }

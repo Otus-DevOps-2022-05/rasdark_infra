@@ -25,7 +25,7 @@ variable "bucket_name" {
 }
 variable "enable_provision" {
   description = "Enable provisioner"
-  default     = true
+  default     = false
 }
 variable "ip_range" {
   description = "IP Range for Network"
