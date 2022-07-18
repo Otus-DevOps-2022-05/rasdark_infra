@@ -2,6 +2,8 @@
 - name: Configure App
   hosts: app
   become: true
+  vars:
+    nginx_official_repo: true
   roles:
     - app
     - jdauphant.nginx

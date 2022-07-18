@@ -1,0 +1,13 @@
+---
+# yamllint disable rule:line-length
+# yamllint disable rule:comments-indentation
+
+- name: Check && install python
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      changed_when: false
