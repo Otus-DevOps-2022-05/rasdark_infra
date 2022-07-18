@@ -16,6 +16,7 @@ rasdark Infra repository for OTUS DevOps Learning
  - Провижинг nginx (для проксирования запросов к reddit app)
  - Тестирование роли: molecule + testinfra
  - Модификация шаблонов packer
+ - Вынос роли db во внешний репозиторий
 
 ## Vagrant
   Всё штатно, без каких-либо проблем, но в этой домашке я не искал "лёгких" путей =)
