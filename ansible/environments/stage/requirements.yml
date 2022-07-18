@@ -1,3 +1,6 @@
 ---
 - src: jdauphant.nginx
   version: v2.21.2
+- name: db
+  src: git+https://rasdark.ru/git/rasdark/otus-db
+  version: origin/root

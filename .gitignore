@@ -8,6 +8,7 @@
 .envrc
 *.retry
 jdauphant.nginx
+ansible/roles/db
 
 # Vagrant & molecule
 .vagrant/
