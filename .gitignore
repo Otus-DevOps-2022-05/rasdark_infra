@@ -16,3 +16,4 @@ jdauphant.nginx
 .molecule
 .cache
 .pytest_cache
+.molecule

@@ -13,6 +13,8 @@ rasdark Infra repository for OTUS DevOps Learning
  - Доработка ansible-ролей для работы с локальным окружением в vagrant
  - Провижинг локального vagrant окружения с использованием ansible
  - Провижинг nginx (для проксирования запросов к reddit app)
+ - Тестирование роли: molecule + testinfra
+ - Модификация шаблонов packer
 
 ## Vagrant
   Всё штатно, без каких-либо проблем, но в этой домашке я не искал "лёгких" путей =)
@@ -40,6 +42,21 @@ rasdark Infra repository for OTUS DevOps Learning
 
   В домашке я не буду рассматривать все 3 пути, хотя я их прошёл, буду использовать 1й вариант.
 
+# Molecule
+  Для подключения делегированного провайдера vagrant для molecule требуется установить прежде всего
+  **molecule-vagrant**
+  ```
+  pip install molecule-vagrant
+  ```
+
+  Таким образом, команда для инициализации default сценария видоизменяется до:
+  ```
+  molecule init scenario -r db -d vagrant --verifier-name testinfra default
+  ```
+
+  Модуль **testinfra** считается deprecated, рекомендовано использовать **pytest-testinfra**
+
+  Для converge стадии molecule создаётся файл converge.yml, а не playbook.yml как в ДЗ =)
 
 
 # Выполнено ДЗ №10
